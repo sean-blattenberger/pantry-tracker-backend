@@ -6,13 +6,17 @@ const bodyParser = require('body-parser')
 const app = module.exports = express()
 const port = parseInt(process.env.PORT || 3000)
 
+const food = require('./api/food')
+
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
 app.use(notFound)
 app.use(errorHandler)
 
-app.use('/api/v1/foodStores', foodStores)
+
+
+app.use('/api/v1/foodStores', food)
 // eslint-disable-next-line
 function notFound(req, res, next) {
   const url = req.originalUrl
