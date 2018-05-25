@@ -3,26 +3,16 @@
 //  npm install express cors body-parser morgan nodemon
 const express = require('express')
 const bodyParser = require('body-parser')
-const morgan = require('morgan')
-const cors = require('cors')
 const app = module.exports = express()
 const port = parseInt(process.env.PORT || 3000)
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
-app.use(morgan(process.env.NODE_ENV !== 'production' ? 'dev' : 'combined'))
-app.use(cors({ origin: true, credentials: true }))
-// Optional Static file handler:
-// app.use('/', express.static('./build'))
 
-// TODO: ADD (MOUNT) YOUR MIDDLEWARE (ROUTES) HERE:
-// Example: app.use('/api/cat', require('./routes/cat'))
-
-
-// These 2 `app.use` MUST be last `.use`'s
 app.use(notFound)
 app.use(errorHandler)
 
+app.use('/api/v1/foodStores', foodStores)
 // eslint-disable-next-line
 function notFound(req, res, next) {
   const url = req.originalUrl
