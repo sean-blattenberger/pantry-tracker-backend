@@ -1,7 +1,7 @@
 const express = require('express');
 const knex = require('../foodStores')
 const router = module.exports = require('express').Router();
-const queries = require('../queries')
+const queries = require('../db/queries')
 
 router.get("/", (request, response, next) => {
     queries.list().then(foodStores => {
